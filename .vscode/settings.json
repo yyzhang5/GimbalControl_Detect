@@ -1,0 +1,9 @@
+{
+  // Detect 下的主程序通过 sys.path 引导从子目录导入依赖，
+  // 这里把同样的三个子目录告知 Pylance，静态分析才能解析这些导入。
+  "python.analysis.extraPaths": [
+    "Detect/Camera",
+    "Detect/Communication",
+    "Detect/Predict"
+  ]
+}

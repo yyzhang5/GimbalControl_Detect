@@ -1,0 +1,63 @@
+# ============================================================
+#  CCD_Detect .gitignore
+#  原则：只提交「代码 + 文档 + 人工标注成果」，
+#        体积大、可重新生成、或与本机环境绑定的内容一律忽略。
+# ============================================================
+
+# ---------- Python 缓存与编译产物（可再生） ----------
+__pycache__/
+*.py[cod]
+*.pyo
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+
+# ---------- 虚拟环境（各人本机自建） ----------
+.venv/
+venv/
+env/
+ENV/
+
+# ---------- 编辑器 / 操作系统 ----------
+# 注意：.vscode/settings.json 必须保留并提交，
+# Pylance 依赖其中的 python.analysis.extraPaths 才能解析 Detect 子目录的导入。
+.vscode/*
+!.vscode/settings.json
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---------- 原始视频素材（约 331 MB） ----------
+# 其中 clip_02_90s_116s.avi 单文件 113 MB，已超过 GitHub 100 MB 单文件硬上限，
+# 推送必然被拒绝。请自行保留本地副本，或在 GitHub Releases 提供下载。
+videos/
+
+# ---------- 中间产物与派生数据集（可由脚本重新生成） ----------
+# Train/video_sample_image.py 的输出；标注源请见 CCD_Images/（已提交）
+sampled_images/
+# Train/lebelme2YOLOlabel.py 依据 CCD_Images/ 生成的数据集
+CCD_UAVdataset/
+
+# ---------- 预训练权重（可从 Ultralytics 重新下载） ----------
+# 下载地址见 Markdown/README_TRAIN.md；Train/train.py 使用 model/yolo11n.pt
+model/
+
+# ---------- 训练实验输出（每次训练重新生成，且含本机绝对路径） ----------
+# 例：args.yaml 内的 save_dir 会记录训练机器的绝对路径，不适合入库
+yolo_CCDUAV_training/
+
+# ---------- 识别定位运行产物（每次运行按时间戳生成） ----------
+# Data-<时间戳>.csv/.png、coordinates_data.csv、coordinate_plot.png 等
+result/
+
+# 说明：以下内容会被提交（体积小且为工程必需）
+#   Detect/          识别定位主程序与依赖（含相机 SDK 驱动）
+#   Train/           训练与数据集制作脚本
+#   Markdown/        全部文档与配图
+#   CCD_Images/      人工标注成果（jpg + labelme json，约 1 MB）
+#   runs/            eval.py 的验证输出，被 Markdown/README_TRAIN.md 引用
+#   .vscode/settings.json
